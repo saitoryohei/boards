@@ -3,12 +3,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ログイン成功</title>
+<title>管理者メニュー</title>
 </head>
 <body>
-    <h2>ログイン成功</h2>
-    <p>ようこそ、${customer.login} さん！</p>
+
+    <h2>管理者メニュー</h2>
+
+    <p>Hello, <strong>${customer.login}</strong> さん！</p>
+
     <hr>
-    <a href="logout.action">ログアウトする</a>
+    
+    <h3>実行できる操作</h3>
+    <ul>
+        <li><a href="register-in.jsp">新規ユーザー登録を行う</a></li>
+    </ul>
+
+    <hr>
+
+    <p><a href="logout.action">ログアウト</a></p>
+
 </body>
 </html>

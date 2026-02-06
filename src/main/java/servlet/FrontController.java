@@ -1,13 +1,19 @@
 package servlet;
 
 import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+// actionパッケージの中身を全部使えるようにする
+import action.LoginAction;
+import action.LoginAgainAction;
+import action.LogoutAction;
+import action.RegisterAction;
 import tool.Action;
-import action.*; // actionパッケージの中身を全部使えるようにする
 
 @WebServlet(urlPatterns={"*.action"})
 public class FrontController extends HttpServlet {
@@ -26,12 +32,20 @@ public class FrontController extends HttpServlet {
                 action = new LogoutAction();
             } else if (path.equals("/loginagain.action")) {
                 action = new LoginAgainAction();
+            } else if (path.equals("/register.action")) {    
+            	action = new RegisterAction();
             }
 
             if (action != null) {
                 page = action.execute(request, response);
                 request.getRequestDispatcher(page).forward(request, response);
+            } else {
+                // デバッグ用：どこにも引っかからなかった場合
+                System.out.println("★Actionが見つかりません: " + path);
             }
+                
+                         
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

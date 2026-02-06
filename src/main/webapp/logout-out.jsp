@@ -3,11 +3,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ログアウト完了</title>
+<title>管理者メニュー</title>
 </head>
 <body>
-    <h2>ログアウトしました。</h2>
-    <p>ご利用ありがとうございました。</p>
-    <a href="login-in.jsp">ログイン画面に戻る</a>
+
+    <h2>管理者メニュー</h2>
+
+    <p>Hello, ${customer.login} さん！</p>
+
+    <hr>
+    <ul>
+        <li><a href="register-in.jsp">新規ユーザー登録</a></li>
+    </ul>
+    <hr>
+
+    <p><a href="logout.action">ログアウト</a></p>
+
 </body>
 </html>

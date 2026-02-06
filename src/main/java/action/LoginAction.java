@@ -24,7 +24,7 @@ public class LoginAction implements Action {
             // 成功：セッションにユーザー情報を入れる
             HttpSession session = request.getSession();
             session.setAttribute("customer", customer);
-            return "/login-out.jsp";
+            return "/register-in.jsp";
         }
 
         // 失敗
