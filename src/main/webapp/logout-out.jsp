@@ -7,17 +7,16 @@
 </head>
 <body>
 
-    <h2>管理者メニュー</h2>
+    <h2>ログアウトしました</h2>
 
-    <p>Hello, ${customer.login} さん！</p>
 
     <hr>
     <ul>
-        <li><a href="register-in.jsp">新規ユーザー登録</a></li>
+        <a href="login-in.jsp">管理者ログイン</a>
     </ul>
     <hr>
 
-    <p><a href="logout.action">ログアウト</a></p>
+   
 
 </body>
 </html>

@@ -54,4 +54,25 @@ public class CustomerDAO extends DAO {
         return line;
     }
     
+    
+ // updatePassword
+    public int updatePassword(int id, String newPassword) throws Exception {
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement(
+            "UPDATE customer SET password = ? WHERE id = ?"
+        );
+        st.setString(1, newPassword);
+        st.setInt(2, id);
+        
+        int line = st.executeUpdate();
+        st.close();
+        con.close();
+        return line; // 更新された行数（1なら成功）
+    }
+    
+    
+    
+    
+    
+    
 }

@@ -7,20 +7,22 @@
 </head>
 <body>
 
-    <h2>管理者メニュー</h2>
-
-    <p>Hello, <strong>${customer.login}</strong> さん！</p>
+    <h2>管理者画面ログイン中</h2>
+    <p>ようこそ、<strong>${customer.login}</strong> さん</p>
 
     <hr>
-    
-    <h3>実行できる操作</h3>
+
     <ul>
-        <li><a href="register-in.jsp">新規ユーザー登録を行う</a></li>
+        <li>
+            <a href="register-in.jsp">アカウントを新規作成</a>
+        </li>
+        <li>
+            <a href="password-change-in.jsp">管理者パスワードの変更</a>
+        </li>
+        <li>
+            <a href="logout.action">管理者画面をログアウトする</a>
+        </li>
     </ul>
-
-    <hr>
-
-    <p><a href="logout.action">ログアウト</a></p>
 
 </body>
 </html>
