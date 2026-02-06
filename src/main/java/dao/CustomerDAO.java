@@ -1,8 +1,10 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import bean.Customer;
 
 public class CustomerDAO extends DAO {
@@ -32,4 +34,68 @@ public class CustomerDAO extends DAO {
         
         return customer;
     }
+    
+ // 既存のsearchメソッドの下に追加してください
+
+    public int insert(Customer customer) throws Exception {
+        Connection con = getConnection();
+
+        PreparedStatement st = con.prepareStatement(
+            "insert into customer(login, password) values(?, ?)");
+        
+        // 1番目の?にログインID、2番目にパスワードをセット
+        st.setString(1, customer.getLogin());
+        st.setString(2, customer.getPassword());
+
+        // 実行（成功すると1、失敗すると0が返ります）
+        int line = st.executeUpdate();
+
+        st.close();
+        con.close();
+        return line;
+    }
+    
+    
+ // updatePassword
+    public int updatePassword(int id, String newPassword) throws Exception {
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement(
+            "UPDATE customer SET password = ? WHERE id = ?"
+        );
+        st.setString(1, newPassword);
+        st.setInt(2, id);
+        
+        int line = st.executeUpdate();
+        st.close();
+        con.close();
+        return line; // 更新された行数（1なら成功）
+    }
+    
+    public List<Customer> searchAll() throws Exception {
+        List<Customer> list = new ArrayList<>();
+        Connection con = getConnection();
+
+        // 全件取得するSQL（WHERE句なし）
+        PreparedStatement st = con.prepareStatement("select * from customer");
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Customer customer = new Customer();
+            customer.setId(rs.getInt("id"));
+            customer.setLogin(rs.getString("login"));
+            customer.setPassword(rs.getString("password"));
+            
+            // リストに追加
+            list.add(customer);
+        }
+
+        st.close();
+        con.close();
+        
+        return list;
+    }
+    
+    
+    
+    
 }

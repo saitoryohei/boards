@@ -3,12 +3,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ログイン成功</title>
+<title>管理者メニュー</title>
 </head>
 <body>
-    <h2>ログイン成功</h2>
-    <p>ようこそ、${customer.login} さん！</p>
+
+    <h2>管理者画面ログイン中</h2>
+    <p>ようこそ、<strong>${customer.login}</strong> さん</p>
+
     <hr>
-    <a href="logout.action">ログアウトする</a>
+
+    <ul>
+        <li>
+            <a href="register-in.jsp">アカウントを新規作成</a>
+        </li>
+        <li>
+            <p><a href="account-list.action">ACCOUNT LIST（管理者一覧）</a></p>
+        </li>
+        <li>
+            <a href="password-change-in.jsp">管理者パスワードの変更</a>
+        </li>
+        <li>
+            <a href="logout.action">管理者画面をログアウトする</a>
+        </li>
+    </ul>
+
 </body>
 </html>
