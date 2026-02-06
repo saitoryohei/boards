@@ -1,8 +1,9 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.Customer;
 
@@ -70,7 +71,29 @@ public class CustomerDAO extends DAO {
         return line; // 更新された行数（1なら成功）
     }
     
-    
+    public List<Customer> searchAll() throws Exception {
+        List<Customer> list = new ArrayList<>();
+        Connection con = getConnection();
+
+        // 全件取得するSQL（WHERE句なし）
+        PreparedStatement st = con.prepareStatement("select * from customer");
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Customer customer = new Customer();
+            customer.setId(rs.getInt("id"));
+            customer.setLogin(rs.getString("login"));
+            customer.setPassword(rs.getString("password"));
+            
+            // リストに追加
+            list.add(customer);
+        }
+
+        st.close();
+        con.close();
+        
+        return list;
+    }
     
     
     

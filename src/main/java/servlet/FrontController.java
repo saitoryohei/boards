@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import action.AccountListAction;
 // actionパッケージの中身を全部使えるようにする
 import action.LoginAction;
 import action.LoginAgainAction;
@@ -45,7 +46,9 @@ public class FrontController extends HttpServlet {
               else if (path.equals("/password-update.action")) {
                 action = new PasswordUpdateAction();
             }
-
+              else if (path.equals("/account-list.action")) {
+                  action = new AccountListAction();
+              }
             if (action != null) {
                 page = action.execute(request, response);
                 System.out.println("★遷移先ページ: " + page); // デバッグ用

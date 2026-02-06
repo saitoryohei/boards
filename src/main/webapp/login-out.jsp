@@ -17,6 +17,9 @@
             <a href="register-in.jsp">アカウントを新規作成</a>
         </li>
         <li>
+            <p><a href="account-list.action">ACCOUNT LIST（管理者一覧）</a></p>
+        </li>
+        <li>
             <a href="password-change-in.jsp">管理者パスワードの変更</a>
         </li>
         <li>
