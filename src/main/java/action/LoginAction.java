@@ -11,6 +11,13 @@ import tool.Action;
 public class LoginAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
+    	HttpSession session = request.getSession();
+        // もしセッションにすでにcustomerが入っているなら、ログイン済みとみなしてメニューへ
+        if (session.getAttribute("customer") != null) {
+            return "/login-out.jsp"; // (または /admin-menu.jsp)
+        }
+    	
+    	
         // 1. 入力された値を受け取る
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -19,10 +26,10 @@ public class LoginAction implements Action {
         CustomerDAO dao = new CustomerDAO();
         Customer customer = dao.search(login, password);
 
-        // 3. 結果に応じてページを振り分ける
+     // 3. 結果に応じてページを振り分ける
         if (customer != null) {
             // 成功：セッションにユーザー情報を入れる
-            HttpSession session = request.getSession();
+            // (sessionは上で取得済みなので、再利用します)
             session.setAttribute("customer", customer);
             return "/login-out.jsp";
         }
