@@ -8,7 +8,7 @@ import java.util.List;
 import bean.Customer;
 
 public class CustomerDAO extends DAO {
-    public Customer search(String login, String password) throws Exception {
+    public Customer search(String login, String password,int role) throws Exception {
         Customer customer = null;
 
         // DAOのgetConnection()を使って接続
@@ -16,9 +16,10 @@ public class CustomerDAO extends DAO {
 
         // SQL文の準備（? を使うことで安全に検索）
         PreparedStatement st = con.prepareStatement(
-            "select * from customer where login=? and password=?");
+            "select * from customer where login=? and password=? and role=?");
         st.setString(1, login);
         st.setString(2, password);
+        st.setInt(3, role);
         
         ResultSet rs = st.executeQuery();
 
@@ -40,14 +41,19 @@ public class CustomerDAO extends DAO {
     public int insert(Customer customer) throws Exception {
         Connection con = getConnection();
 
+        // ★ここが原因！
+        // SQL文のカッコ内を (login, password, role) にし、
+        // values を (?, ?, ?) と 3つ に増やす必要があります。
         PreparedStatement st = con.prepareStatement(
-            "insert into customer(login, password) values(?, ?)");
+            "insert into customer(login, password, role) values(?, ?, ?)");
         
-        // 1番目の?にログインID、2番目にパスワードをセット
+        // 1つ目：ID
         st.setString(1, customer.getLogin());
+        // 2つ目：パスワード
         st.setString(2, customer.getPassword());
+        // ★3つ目：role（権限）をセットする記述が足りていないはずです
+        st.setInt(3, customer.getRole());
 
-        // 実行（成功すると1、失敗すると0が返ります）
         int line = st.executeUpdate();
 
         st.close();

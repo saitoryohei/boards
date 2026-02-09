@@ -8,8 +8,19 @@ public class Customer implements Serializable {
     private int id;
     private String login;
     private String password;
+    private int role;
+    
 
     // getter/setter
+    public int getRole() {
+    	return role;
+    }
+    public void setRole(int role){
+    	this.role = role;
+    	
+    	
+    }
+    
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

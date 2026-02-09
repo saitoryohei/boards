@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import action.AccountListAction;
-// actionパッケージの中身を全部使えるようにする
 import action.LoginAction;
 import action.LoginAgainAction;
 import action.LogoutAction;
@@ -19,16 +18,14 @@ import tool.Action;
 
 @WebServlet(urlPatterns={"*.action"})
 public class FrontController extends HttpServlet {
-    // 共通処理メソッドを作ると確実です
+    
     private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // GETの時はEncoding設定をスキップするか、判定を入れるのが安全
-        if (request.getMethod().equalsIgnoreCase("POST")) {
-            request.setCharacterEncoding("UTF-8");
-        }
         
-        // パスの取得（先頭の / を含めて判定）
+        // ★ 修正点：if文を外して、常にUTF-8を設定するようにしました
+        request.setCharacterEncoding("UTF-8");
+        
         String path = request.getServletPath();
-        System.out.println("★アクセスされたパス: " + path); // デバッグ用
+        System.out.println("★アクセスされたパス: " + path);
 
         Action action = null;
         String page = null;
@@ -42,27 +39,25 @@ public class FrontController extends HttpServlet {
                 action = new LoginAgainAction();
             } else if (path.equals("/register.action")) {    
                 action = new RegisterAction();
-            }
-              else if (path.equals("/password-update.action")) {
+            } else if (path.equals("/password-update.action")) {
                 action = new PasswordUpdateAction();
+            } else if (path.equals("/account-list.action")) {
+                action = new AccountListAction();
             }
-              else if (path.equals("/account-list.action")) {
-                  action = new AccountListAction();
-              }
+
             if (action != null) {
                 page = action.execute(request, response);
-                System.out.println("★遷移先ページ: " + page); // デバッグ用
+                System.out.println("★遷移先ページ: " + page);
                 request.getRequestDispatcher(page).forward(request, response);
             } else {
                 System.out.println("★Actionが見つかりません: " + path);
-                // どこにも該当しない場合はログイン画面へ飛ばすなどの処理
                 response.sendRedirect("login-in.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();
             throw new ServletException(e);
         }
-    }
+    } // ← ここで doProcess 終わり
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doProcess(request, response);

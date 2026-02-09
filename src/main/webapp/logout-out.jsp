@@ -12,7 +12,7 @@
 
     <hr>
     <ul>
-        <a href="login-in.jsp">管理者ログイン</a>
+        <a href="login-in.jsp">ログイン</a>
     </ul>
     <hr>
 

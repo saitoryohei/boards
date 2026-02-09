@@ -50,7 +50,7 @@
     </table>
 
     <br>
-    <a href="login.action">メニューに戻る</a>
+    <a href="login-out.jsp">メニューに戻る</a>
 
 </body>
 </html>
