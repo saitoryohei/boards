@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import action.AccountListAction;
+import action.BoardAction;
 import action.LoginAction;
 import action.LoginAgainAction;
 import action.LogoutAction;
@@ -45,6 +46,11 @@ public class FrontController extends HttpServlet {
                 action = new AccountListAction();
             }
 
+             else if (path.equals("/board.action")) {   
+            action = new BoardAction();
+            }
+            
+            
             if (action != null) {
                 page = action.execute(request, response);
                 System.out.println("★遷移先ページ: " + page);

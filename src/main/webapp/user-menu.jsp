@@ -23,7 +23,10 @@
     <h2>ようこそ、<%= c.getLogin() %> さん！</h2>
     <p>（一般ユーザーとしてログイン中）</p>
 
+　　　　　
+
     <ul>
+    　　<li><a href="board.action">掲示板（BOARD）へ</a></li>
         <li><a href="password-update.action">パスワード変更</a></li>
         <li><a href="logout.action">ログアウト</a></li>
     </ul>

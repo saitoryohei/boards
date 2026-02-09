@@ -16,6 +16,9 @@
         <li>
             <a href="register-in.jsp">アカウントを新規作成</a>
         </li>
+        
+        <li><a href="board.action">掲示板（BOARD）を確認・管理する</a></li>
+        
         <li>
             <p><a href="account-list.action">ACCOUNT LIST（管理者一覧）</a></p>
         </li>
